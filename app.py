@@ -1,8 +1,6 @@
-# Disable tokenizer parallelism to avoid deadlocks
 import os
 import sys
-# Add parent directory to path to allow importing chatterbox from root
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# sys.path hack removed - chatterbox is now local
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import streamlit as st
