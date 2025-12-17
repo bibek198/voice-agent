@@ -1,0 +1,10 @@
+Please check FRAME_DURATION_MS. The timestamps can be inaccurate
+Please check FRAME_DURATION_MS. The timestamps can be inaccurate
+Please check FRAME_DURATION_MS. The timestamps can be inaccurate
+    def forward(self, wav, lang, decoding='ctc', compute_timestamps=None):
+        encoder_outputs, encoded_lengths = self.encode(wav)
+        if decoding == 'ctc':
+            return self._ctc_decode(encoder_outputs, encoded_lengths, lang, compute_timestamps)
+        if decoding == 'rnnt':
+            return self._rnnt_decode(encoder_outputs, encoded_lengths, lang)
+
