@@ -17,3 +17,4 @@ soundfile
 streamlit
 onnxruntime
 watchdog
+sarvamai
