@@ -40,16 +40,37 @@ INPUT_AUDIO = os.path.join(AUDIO_DIR, "input.wav")
 OUTPUT_AUDIO = os.path.join(AUDIO_DIR, "output.wav")
 os.makedirs(AUDIO_DIR, exist_ok=True)
 
-# Initialize Resources (Cached)
-@st.cache_resource
-def load_resources():
-    stt = IndicSTT()
-    llm = SarvamLLM()
-    tts = ChatterboxTTS()
-    db = VectorStore()
-    return stt, llm, tts, db
+# Initialize Resources (Cached individually to save memory/timeout)
+import gc
 
-stt, llm, tts, db = load_resources()
+@st.cache_resource
+def load_stt():
+    stt = IndicSTT()
+    gc.collect()
+    return stt
+
+@st.cache_resource
+def load_llm_client():
+    llm = SarvamLLM()
+    gc.collect()
+    return llm
+
+@st.cache_resource
+def load_tts():
+    tts = ChatterboxTTS()
+    gc.collect()
+    return tts
+
+@st.cache_resource
+def load_db():
+    db = VectorStore()
+    gc.collect()
+    return db
+
+stt = load_stt()
+llm = load_llm_client()
+tts = load_tts()
+db = load_db()
 
 # UI Layout
 col1, col2 = st.columns([1, 1])

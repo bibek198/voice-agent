@@ -14,7 +14,8 @@ class IndicSTT:
         self.model = AutoModel.from_pretrained(
             "ai4bharat/indic-conformer-600m-multilingual",
             trust_remote_code=True,
-            token=token
+            token=token,
+            low_cpu_mem_usage=True
         ).to(self.device)
         self.model.eval()
 
