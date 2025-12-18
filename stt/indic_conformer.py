@@ -10,9 +10,11 @@ class IndicSTT:
         print(f"[STT] Loading Indic Conformer on {self.device}...")
         
         # Load Model
+        token = os.getenv("HF_TOKEN")
         self.model = AutoModel.from_pretrained(
             "ai4bharat/indic-conformer-600m-multilingual",
-            trust_remote_code=True
+            trust_remote_code=True,
+            token=token
         ).to(self.device)
         self.model.eval()
 
@@ -21,7 +23,8 @@ class IndicSTT:
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(
                 "ai4bharat/indic-conformer-600m-multilingual",
-                trust_remote_code=True
+                trust_remote_code=True,
+                token=token
             )
         except:
             self.tokenizer = None
