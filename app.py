@@ -1,4 +1,13 @@
+# Fix for ChromaDB + Streamlit Cloud (SQLite version issue)
 import os
+
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
+
 import sys
 # sys.path hack removed - chatterbox is now local
 os.environ["TOKENIZERS_PARALLELISM"] = "false"

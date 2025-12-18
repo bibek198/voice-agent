@@ -18,3 +18,5 @@ streamlit
 onnxruntime
 watchdog
 sarvamai
+chromadb
+pysqlite3-binary
