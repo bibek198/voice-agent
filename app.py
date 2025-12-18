@@ -12,6 +12,13 @@ import sys
 # sys.path hack removed - chatterbox is now local
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+# Load Secrets for Streamlit Cloud
+import streamlit as st
+if "HF_TOKEN" in st.secrets:
+    os.environ["HF_TOKEN"] = st.secrets["HF_TOKEN"]
+    # Also set for specific libs just in case
+    os.environ["HUGGING_FACE_HUB_TOKEN"] = st.secrets["HF_TOKEN"]
+
 import streamlit as st
 import shutil
 import soundfile as sf
